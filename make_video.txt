@@ -1,0 +1,14 @@
+ffmpeg -framerate 10 -i ./%d.png  -c:v libx264 -r 30 -pix_fmt yuv420p out4.mp4
+
+ffmpeg -framerate 1 -pattern_type glob -i '*.png'  -c:v libx264 -r 30 -pix_fmt yuv420p out3.mp4
+
+ffmpeg -r 1 -i %d.png -c:v libx264 -vf fps=15 -pix_fmt yuv420p out2.mp4
+
+ffmpeg -r 1/5 -i %d.png -c:v libx264 -vf fps=5 -pix_fmt yuv420p out.mp4
+
+
+extract frames
+
+ffmpeg -ss 460 -t 15 -i send.mp4  ./images5/%d.png
+
+ffmpeg -ss 00:00:03 -t 00:00:08 -i movie.mp4 -acodec copy -vcodec copy -async 1 cut.mp4
